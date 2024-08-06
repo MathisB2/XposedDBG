@@ -4,7 +4,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +21,8 @@ import java.util.List;
 public class AppList extends AppCompatActivity {
 
     private ArrayList<AppInfo> appList;
+    private ListView appListView;
+    private AppListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,20 @@ public class AppList extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        this.loadInstalledApps();
+
+
+        this.setupListView();
+
     }
 
+
+    private void setupListView(){
+        this.appList = new ArrayList<>();
+        this.appListView = findViewById(R.id.app_listView);
+
+        this.adapter = new AppListAdapter(this, this.getInstalledApps());
+        this.appListView.setAdapter(this.adapter);
+    }
 
 
 
