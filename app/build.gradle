@@ -26,9 +26,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
-    implementation 'de.robv.android.xposed:api:82'
+    compileOnly 'de.robv.android.xposed:api:82'
 //    implementation 'de.robv.android.xposed:api:82:sources'
 }
