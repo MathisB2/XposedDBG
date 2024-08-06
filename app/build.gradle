@@ -32,6 +32,10 @@ android {
 }
 
 dependencies {
+    implementation libs.material
+    implementation libs.appcompat
+    implementation libs.activity
+    implementation libs.constraintlayout
     compileOnly 'de.robv.android.xposed:api:82'
 //    implementation 'de.robv.android.xposed:api:82:sources'
 }
