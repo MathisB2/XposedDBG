@@ -76,14 +76,12 @@ public class FilteredList<T> extends ArrayList<T>{
         this.applyFilters();
     }
 
-    private void applyFilters(){
+    public void applyFilters(){
         this.filteredList.clear();
         this.filteredList.addAll(this);
 
-//        this.filteredList = (ArrayList<T>) this.clone();
-
         for (Filter f: this.filters) {
-            this.filteredList = f.applyTo(this.filteredList);
+            f.applyTo(this.filteredList);
         }
     }
 

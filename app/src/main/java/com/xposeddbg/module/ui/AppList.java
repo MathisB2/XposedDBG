@@ -4,9 +4,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +34,7 @@ public class AppList extends AppCompatActivity {
     private FilteredList<AppInfo> appList;
     private ListView appListView;
     private AppListAdapter adapter;
+    private Filter<AppInfo> searchFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +54,72 @@ public class AppList extends AppCompatActivity {
         this.setupFilters();
     }
 
-    private void setupFilters(){
-        Filter<AppInfo> f = new Filter<>();
-        f.setOnApply(new filterApplyCallback<AppInfo>() {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+        SearchView searchBar = (SearchView) searchItem.getActionView();
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public ArrayList<AppInfo> applyTo(ArrayList<AppInfo> list) {
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                searchFilter.setOnApply(new filterApplyCallback<AppInfo>() {
+                    @Override
+                    public void applyTo(ArrayList<AppInfo> list) {
+                        onSearchFilterChanged(list, newText);
+                    }
+
+                });
+                appList.applyFilters();
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setupFilters(){
+        Filter<AppInfo> sortFilter = new Filter<>();
+        sortFilter.setOnApply(new filterApplyCallback<AppInfo>() {
+            @Override
+            public void applyTo(ArrayList<AppInfo> list) {
                 Comparator<AppInfo> comparator;
                 comparator = Comparator.comparing(AppInfo::getAppName);
                 list.sort(comparator);
 
                 adapter.notifyDataSetChanged();
-                return list;
             }
 
 
         });
-        this.appList.filters.add(f);
-//        this.filterSet.addFilter(new SortFilter())
-//        this.filterSet.addFilter(new SearchFilter())
+        this.appList.filters.add(sortFilter);
+
+        this.searchFilter = new Filter<>();
+        searchFilter.setOnApply(new filterApplyCallback<AppInfo>() {
+            @Override
+            public void applyTo(ArrayList<AppInfo> list) {
+                onSearchFilterChanged(list, "");
+            }
+        });
+        this.appList.filters.add(this.searchFilter);
+    }
+
+    private void onSearchFilterChanged(ArrayList<AppInfo> list, String query){
+        for (int i = 0; i < list.size(); i++) {
+            AppInfo currentApp = list.get(i);
+            if (!currentApp.getAppName().toLowerCase().contains(query.toLowerCase()) &&
+                    !currentApp.getPackageName().toLowerCase().contains(query.toLowerCase())) {
+                list.remove(i);
+                i--;
+            }
+        }
     }
 
     private void setupListView(){

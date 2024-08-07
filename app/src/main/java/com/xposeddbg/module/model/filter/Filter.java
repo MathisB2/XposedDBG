@@ -16,9 +16,8 @@ public class Filter<T> {
         this.onFilterApplyCallback = callback;
     }
 
-    public ArrayList<T> applyTo(ArrayList<T> list) {
-        if(!this.enabled) return list;
-        return onFilterApplyCallback.applyTo(list);
+    public void applyTo(ArrayList<T> list) {
+        if(this.enabled) onFilterApplyCallback.applyTo(list);
     }
 
 
