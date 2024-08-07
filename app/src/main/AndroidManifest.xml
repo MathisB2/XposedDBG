@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.XposedDBG"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.AppDetail"
+            android:exported="false"
+            android:parentActivityName=".ui.AppList"/>
         <activity
             android:name=".ui.AppList"
             android:exported="true">
@@ -24,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <meta-data
             android:name="xposedmodule"

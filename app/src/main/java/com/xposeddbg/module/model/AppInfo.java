@@ -4,11 +4,13 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
-public class AppInfo {
+import java.io.Serializable;
+
+public class AppInfo implements Serializable {
     private String appName;
     private String packageName;
     private String version;
-    private Drawable icon;
+    private transient Drawable icon;
 
     public AppInfo(String appName, String packageName, String version, Drawable icon) {
         this.appName = appName;

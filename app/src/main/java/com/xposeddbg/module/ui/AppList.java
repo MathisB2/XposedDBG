@@ -1,5 +1,6 @@
 package com.xposeddbg.module.ui;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -133,7 +134,10 @@ public class AppList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AppInfo selectedApp = appList.getFilteredList().get(position);
-                Toast.makeText(AppList.this, selectedApp.getAppName(), Toast.LENGTH_SHORT).show();
+
+                Intent startIntent = new Intent(AppList.this, AppDetail.class);
+                startIntent.putExtra("appInfo",selectedApp);
+                startActivity(startIntent);
             }
         });
     }
