@@ -1,5 +1,6 @@
 package com.xposeddbg.module.model;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ public class AppInfo implements Serializable {
     private String packageName;
     private String version;
     private transient Drawable icon;
+    private transient Intent launchIntent;
 
     public AppInfo(String appName, String packageName, String version, Drawable icon) {
         this.appName = appName;
@@ -38,6 +40,19 @@ public class AppInfo implements Serializable {
 
     public void setIcon(Drawable icon) {
         this.icon = icon;
+    }
+
+    public boolean isLaunchable(){
+        return this.launchIntent != null;
+    }
+
+    public Intent getLaunchIntent() {
+        return launchIntent;
+    }
+
+    public void setLaunchIntent(Intent launchIntent) {
+        if (launchIntent != null) launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.launchIntent = launchIntent;
     }
 
     @NonNull
