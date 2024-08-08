@@ -36,6 +36,10 @@ public class AppInfo implements Serializable {
     }
 
 
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
+    }
+
     @NonNull
     @Override
     public String toString() {
