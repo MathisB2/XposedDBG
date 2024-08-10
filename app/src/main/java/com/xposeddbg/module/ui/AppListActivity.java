@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +21,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.xposeddbg.module.R;
 import com.xposeddbg.module.model.AppInfo;
 import com.xposeddbg.module.model.filter.Filter;
-import com.xposeddbg.module.model.filter.FilterGroup;
 import com.xposeddbg.module.model.filter.FilteredList;
 import com.xposeddbg.module.model.filter.filterApplyCallback;
 
@@ -30,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class AppList extends AppCompatActivity {
+public class AppListActivity extends AppCompatActivity {
 
     private FilteredList<AppInfo> appList;
     private ListView appListView;
@@ -135,7 +133,7 @@ public class AppList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AppInfo selectedApp = appList.getFilteredList().get(position);
 
-                Intent startIntent = new Intent(AppList.this, AppDetail.class);
+                Intent startIntent = new Intent(AppListActivity.this, AppDetailActivity.class);
                 startIntent.putExtra("appInfo",selectedApp);
                 startActivity(startIntent);
             }

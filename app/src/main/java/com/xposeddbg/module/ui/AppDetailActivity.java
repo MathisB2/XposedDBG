@@ -16,16 +16,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.xposeddbg.module.DexClassExplorer;
 import com.xposeddbg.module.R;
 import com.xposeddbg.module.model.AppInfo;
-import com.xposeddbg.module.model.hooks.HookInfo;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.List;
 
-public class AppDetail extends AppCompatActivity {
+public class AppDetailActivity extends AppCompatActivity {
     private AppInfo currentApp;
     private ImageView appIcon;
     private TextView appTitle;
@@ -102,7 +99,17 @@ public class AppDetail extends AppCompatActivity {
         this.apkPath.setText(this.currentApp.getApkDirectory());
 
 
-        List<HookInfo> hookableMethods = DexClassExplorer.getMethods(this.currentApp);
+
+
+        Button tmpButton = findViewById(R.id.tmp_button);
+        tmpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startIntent = new Intent(AppDetailActivity.this, AppTreeActivity.class);
+                startIntent.putExtra("appInfo",currentApp);
+                startActivity(startIntent);
+            }
+        });
     }
 
 

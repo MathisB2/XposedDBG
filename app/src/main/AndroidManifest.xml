@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
@@ -13,14 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.XposedDBG"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".ui.AppDetail"
+            android:name=".ui.AppTreeActivity"
             android:exported="false"
-            android:parentActivityName=".ui.AppList"/>
+            android:parentActivityName=".ui.AppDetailActivity"/>
         <activity
-            android:name=".ui.AppList"
-            android:exported="true">
+            android:name=".ui.AppDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.AppListActivity" />
+        <activity
+            android:name=".ui.AppListActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
