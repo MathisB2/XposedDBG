@@ -4,6 +4,7 @@ package com.xposeddbg.module;
 import android.util.Log;
 
 import com.xposeddbg.module.model.AppInfo;
+import com.xposeddbg.module.model.hooks.HookInfo;
 
 import dalvik.system.DexFile;
 import dalvik.system.PathClassLoader;
@@ -17,8 +18,8 @@ import java.util.List;
 public class DexClassExplorer {
 
 
-    public static List<String> getMethods(AppInfo appInfo) {
-        List<String> methodNames = new ArrayList<>();
+    public static List<HookInfo> getMethods(AppInfo appInfo) {
+        List<HookInfo> hookableMethods = new ArrayList<>();
 
         try {
             DexFile dexFile = new DexFile(new File(appInfo.getApkDirectory()));
@@ -37,9 +38,13 @@ public class DexClassExplorer {
 
                         for (Method method : clazz.getDeclaredMethods()) {
                             if(filter.passFilter(method.getName())){
-                                Log.d("xposed", "\t Method : " + method.getName());
 
-                                methodNames.add(method.getName());
+                                HookInfo hookInfo = new HookInfo(
+                                        clazz.getName(),
+                                        method.getName(),
+                                        method.getParameterTypes()
+                                );
+                                hookableMethods.add(hookInfo);
                             }
 
                         }
@@ -52,7 +57,7 @@ public class DexClassExplorer {
             e.printStackTrace();
         }
 
-        return methodNames;
+        return hookableMethods;
     }
 
 }

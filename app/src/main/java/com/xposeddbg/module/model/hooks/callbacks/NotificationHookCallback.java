@@ -1,6 +1,6 @@
-package com.xposeddbg.module.model.hookCallbacks;
+package com.xposeddbg.module.model.hooks.callbacks;
 
-import com.xposeddbg.module.model.HookInfo;
+import com.xposeddbg.module.model.hooks.HookInfo;
 
 public class NotificationHookCallback extends AbstractHookCallback{
     @Override

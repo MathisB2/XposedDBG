@@ -1,9 +1,6 @@
-package com.xposeddbg.module.model.hookCallbacks;
+package com.xposeddbg.module.model.hooks.callbacks;
 
-import android.util.Log;
-
-import com.xposeddbg.module.R;
-import com.xposeddbg.module.model.HookInfo;
+import com.xposeddbg.module.model.hooks.HookInfo;
 
 public class ToastHookCallback extends AbstractHookCallback{
     @Override

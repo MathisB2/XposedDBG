@@ -1,8 +1,8 @@
-package com.xposeddbg.module.model;
+package com.xposeddbg.module.model.hooks;
 
-import com.xposeddbg.module.model.hookCallbacks.LogHookCallback;
-import com.xposeddbg.module.model.hookCallbacks.NotificationHookCallback;
-import com.xposeddbg.module.model.hookCallbacks.ToastHookCallback;
+import com.xposeddbg.module.model.hooks.callbacks.LogHookCallback;
+import com.xposeddbg.module.model.hooks.callbacks.NotificationHookCallback;
+import com.xposeddbg.module.model.hooks.callbacks.ToastHookCallback;
 
 import java.io.Serializable;
 import java.util.Arrays;
