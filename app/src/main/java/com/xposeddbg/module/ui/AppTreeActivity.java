@@ -1,8 +1,10 @@
 package com.xposeddbg.module.ui;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -35,6 +37,15 @@ public class AppTreeActivity extends AppCompatActivity {
         AppInfo currentApp = getIntent().getSerializableExtra("appInfo", AppInfo.class);
 
         this.hookableMethods = (ArrayList<HookInfo>) DexClassExplorer.getMethods(currentApp);
+    }
 
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
