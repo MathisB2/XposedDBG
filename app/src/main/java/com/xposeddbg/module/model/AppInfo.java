@@ -11,14 +11,16 @@ public class AppInfo implements Serializable {
     private String appName;
     private String packageName;
     private String version;
+    private String apkDirectory;
     private transient Drawable icon;
     private transient Intent launchIntent;
 
-    public AppInfo(String appName, String packageName, String version, Drawable icon) {
+    public AppInfo(String appName, String packageName, String version, Drawable icon, String apkDirectory) {
         this.appName = appName;
         this.packageName = packageName;
         this.version = version;
         this.icon = icon;
+        this.apkDirectory = apkDirectory;
     }
 
     public String getAppName() {
@@ -53,6 +55,11 @@ public class AppInfo implements Serializable {
     public void setLaunchIntent(Intent launchIntent) {
         if (launchIntent != null) launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.launchIntent = launchIntent;
+    }
+
+
+    public String getApkDirectory() {
+        return apkDirectory;
     }
 
     @NonNull

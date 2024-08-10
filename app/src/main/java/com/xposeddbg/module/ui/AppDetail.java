@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,17 +12,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.LongDef;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.xposeddbg.module.DexClassExplorer;
 import com.xposeddbg.module.R;
 import com.xposeddbg.module.model.AppInfo;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppDetail extends AppCompatActivity {
     private AppInfo app;
@@ -90,8 +95,6 @@ public class AppDetail extends AppCompatActivity {
         });
 
 
-
-
         this.packageName = findViewById(R.id.appDetail_packageName);
         this.packageName.setText(this.app.getPackageName());
 
@@ -99,7 +102,10 @@ public class AppDetail extends AppCompatActivity {
         this.versionName.setText(this.app.getVersion());
 
         this.apkPath = findViewById(R.id.appDetail_apkDirectory);
-        this.apkPath.setText("test.apk");
+        this.apkPath.setText(this.app.getApkDirectory());
+
+
+        List<String> methodNames = DexClassExplorer.getMethods(this.app);
     }
 
 

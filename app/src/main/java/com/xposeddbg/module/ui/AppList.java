@@ -154,8 +154,9 @@ public class AppList extends AppCompatActivity {
             String packageName = packageInfo.packageName;
             String version = packageInfo.versionName;
             Drawable icon = packageInfo.applicationInfo.loadIcon(pm);
+            String apkDirectory = packageInfo.applicationInfo.sourceDir;
 
-            appList.add(new AppInfo(appName, packageName, version, icon));
+            appList.add(new AppInfo(appName, packageName, version, icon, apkDirectory));
         }
     }
 
