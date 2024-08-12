@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 public class AppInfo implements Serializable {
     private String appName;
@@ -29,6 +31,10 @@ public class AppInfo implements Serializable {
 
     public String getPackageName() {
         return packageName;
+    }
+
+    public List<String> getPackageNameAsList(){
+        return Arrays.asList(this.getPackageName().split("\\.",-1));
     }
 
     public String getVersion(){

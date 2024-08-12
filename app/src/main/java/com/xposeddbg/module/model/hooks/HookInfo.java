@@ -5,7 +5,9 @@ import com.xposeddbg.module.model.hooks.callbacks.NotificationHookCallback;
 import com.xposeddbg.module.model.hooks.callbacks.ToastHookCallback;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 
@@ -66,5 +68,16 @@ public class HookInfo implements Serializable {
                 "| methodName : " + methodName + "\n" +
                 "| parameterTypes : " + Arrays.toString(parameterTypes) + "\n" +
                 "+-\n";
+    }
+
+
+    public List<String> getClasspathAsList(){
+        return Arrays.asList(this.getClassName().split("\\.",-1));
+    }
+
+
+    public String getShortenClassName(){
+        List<String> packages = this.getClasspathAsList();
+        return packages.get(packages.size()-1);
     }
 }

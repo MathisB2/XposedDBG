@@ -7,4 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.AppTreeActivity">
 
+
+    <io.github.ikws4.treeview.TreeView
+        android:id="@+id/appTree_treeView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipChildren="false"
+        android:clipToOutline="false"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
