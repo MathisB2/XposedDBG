@@ -62,4 +62,26 @@ public class DexTreeItemHelper {
             }
         }
     }
+
+
+    public static boolean isMethodItem(DexTreeItem item){
+        return !item.isExpandable();
+    }
+
+    public static boolean isClassItem(DexTreeItem item){
+        if (isMethodItem(item)) return false;
+
+        List<TreeItem<MethodWrapper>> children = item.getChildren();
+
+        if(children.isEmpty()) return true;
+        for (TreeItem<MethodWrapper> child: children) {
+            if(isMethodItem((DexTreeItem) child)) return true;
+        }
+        return false;
+    }
+
+    public static boolean isPackageItem(DexTreeItem item){
+        if(isMethodItem(item)) return false;
+        return !isClassItem(item);
+    }
 }

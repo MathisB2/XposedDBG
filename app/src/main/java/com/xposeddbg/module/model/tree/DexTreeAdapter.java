@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 
 import com.xposeddbg.module.R;
 
+import java.util.List;
+
 import io.github.ikws4.treeview.TreeItem;
 import io.github.ikws4.treeview.TreeView;
 import io.github.ikws4.treeview.TreeView.Adapter.OnTreeItemClickListener;
@@ -35,12 +37,14 @@ public class DexTreeAdapter extends TreeView.Adapter<DexTreeAdapter.ViewHolder, 
         super.onBindViewHolder(holder, position);
 
         TreeItem<MethodWrapper> item = items.get(position);
-//        if (item.isExpandable()) {
-//            holder.icon.setImageResource(R.drawable.ic_folder);
-//        } else {
-//            holder.icon.setImageResource(R.drawable.ic_file);
-//        }
 
+        if(DexTreeItemHelper.isMethodItem((DexTreeItem) item))
+            holder.icon.setImageResource(R.drawable.ic_method);
+        else if (DexTreeItemHelper.isClassItem((DexTreeItem) item)) {
+            holder.icon.setImageResource(R.drawable.ic_class);
+        }else{
+            holder.icon.setImageResource(R.drawable.ic_package);
+        }
         holder.name.setText(item.getValue().getDisplayedValue());
     }
 
