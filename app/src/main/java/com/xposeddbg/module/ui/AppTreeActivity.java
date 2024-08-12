@@ -61,7 +61,7 @@ public class AppTreeActivity extends AppCompatActivity {
 
         for (HookInfo method:this.hookableMethods) {
 
-            DexTreeItem child = helper.createItemHierarchy(method);
+            DexTreeItem child = helper.createMethodHierarchy(method);
             if (child != null)
                 helper.addChildIfNotExists(packageRoot,child,true);
         }

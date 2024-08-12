@@ -9,6 +9,24 @@ import io.github.ikws4.treeview.TreeItem;
 
 public class DexTreeItemHelper {
 
+    public DexTreeItem createMethodHierarchy(HookInfo method){
+        DexTreeItem hierarchy = this.createItemHierarchy(method.getClasspathAsList());
+
+        boolean hasChild;
+        DexTreeItem currentRoot = hierarchy;
+        do {
+            List<TreeItem<MethodWrapper>> child = currentRoot.getChildren();
+            hasChild = !child.isEmpty();
+            if(hasChild)
+                currentRoot = (DexTreeItem) child.get(0);
+        }while (hasChild);
+
+        currentRoot.getChildren().add(new DexTreeItem(method.getMethodName()));
+
+        return hierarchy;
+    }
+
+
     public DexTreeItem createItemHierarchy(HookInfo hookInfo){
         return this.createItemHierarchy(hookInfo.getClasspathAsList());
     }
